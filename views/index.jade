@@ -1,10 +1,40 @@
 extends layout
 
 block body
-  div(ng-controller='ItemCtrl')
-    div(ng-view)
+  nav(class='navbar navbar-inverse navbar-fixed-top')
+    div(class='container-fluid')
+      div(class='navbar-header')
+        a(class='navbar-brand', href="#") Deprecated
+      div(class='navbar-collapse collapse')
+        ul(class='nav navbar-nav navbar-right')
+          li
+            a(href='/new') Create
+        form(class='navbar-form navbar-right')
+          input(type='text' class='form-control' placeholder='Filter...')
+  div(class='container-fluid')
+    div(ng-controller='ItemCtrl')
+      h1 List of all deprecated items
+      table(class='table table-stripped')
+        tr
+          th(colspan='2') Old
+          th(colspan='2') New
+          th(colspan='2') Dates
+        tr
+          th Group
+          th Name
+          th Group
+          th Name
+          th Deprecation
+          th Unusable
+        tr(ng-repeat="item in deprecatedItems", ng-class-odd="'odd'")
+          td {{ item.deprecated_item.group }}
+          td {{ item.deprecated_item.name }}
+          td {{ item.replaced_by.group }}
+          td {{ item.replaced_by.name }}
+          td {{ item.deprecation_date }}
+          td {{ item.unusable_date }}
 
-  script(src='js/lib/angular/angular.js')
+  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js')
   script(src='js/app.js')
   script(src='js/controller_items.js')
   script(src='js/service_items.js')
