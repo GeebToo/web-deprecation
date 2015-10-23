@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var request = require('request');
 var Q = require("q");
 
-var DeprecatedItem = require('../models/depItem.js');
+var DeprecatedItem = require('./api/models/depItem.js');
 
 /**
 * Query success, handle the result
@@ -15,7 +15,7 @@ function handleResult(data, res) {
         error.message = "No deprecated item found at all.";
         res.status(404).json(error);
     } else {
-        res.json(data);
+        res.json(data).setHeader('Access-Control-Allow-Origin', 'http://localhost');
     }
 }
 
@@ -137,4 +137,4 @@ router.delete(
     }
 );
 
-module.exports = router;
+module.exports.api = router;

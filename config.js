@@ -5,7 +5,8 @@ config.database = {
 	name: 'web-deprecation'
 }
 config.api = {
-	port: 1337
+	port: 1337,
+	allow: ['http://localhost']
 }
 
 module.exports = config;

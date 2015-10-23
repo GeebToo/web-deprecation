@@ -15,21 +15,35 @@ mongoose.connect(mongoFullUrl, function(err) {
 });
 
 // routes
-var depItemRoutes = require('./routes/depItem');
+var indexRoute = require('./routes/index');
+var apiRoute = require('./routes/api');
 
 // express
 var express = require('express');
 var app = express();
 
 var bodyParser = require('body-parser');
+var path = require('path');
 
 /**
  * Start listening to the trips HTTP requests
  */
-function startListening(){
+function startListening() {
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
   app.use(bodyParser.json());
-  app.use('/', depItemRoutes);
+  app.use(express.static(path.join(__dirname, 'public')));
+  
+  // serve index and view partials
+  app.get('/', indexRoute.index);
+  app.get('/partials/:name', indexRoute.partials);
 
-  console.log('Listening on port ',config.api.port);
+  // JSON API
+  app.use('/api', apiRoute.api);
+
+  // redirect all others to the index (HTML5 history)
+  app.get('*', indexRoute.index);
+  
+  console.log('Listening on port ', config.api.port);
   app.listen(config.api.port);
 }

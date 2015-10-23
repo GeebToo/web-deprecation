@@ -9,7 +9,7 @@ app.factory('ItemService', function ($http, $q) {
         getItems: function () {
             var deferred = $q.defer();
             $http
-                    .get('/api/deprecated/')
+                    .get('http://localhost:1337/api/deprecated/')
                     .success(function (data, status) {
                         factory.items = data;
                         deferred.resolve(factory.items);
