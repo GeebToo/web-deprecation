@@ -8,33 +8,47 @@ block body
       div(class='navbar-collapse collapse')
         ul(class='nav navbar-nav navbar-right')
           li
-            a(href='/new') Create
+            a(href='/create') Create
         form(class='navbar-form navbar-right')
-          input(type='text' class='form-control' placeholder='Filter...')
+          input(type='text' class='form-control' placeholder='Old Group filter')
+          input(type='text' class='form-control' placeholder='New Group filter')
+          input(type='text' class='form-control' placeholder='Usage filter')
   div(class='container-fluid', ng-controller='ItemCtrl')
     h1 List of all deprecated items
-    table(class='table table-stripped table-condensed')
-      tr
-        th(colspan='2') Old
-        th(colspan='2') New
-        th(colspan='2') Dates
-        th(rowspan='2') Belongs To
-      tr
-        th Group
-        th Name
-        th Group
-        th Name
-        th Deprecation
-        th Unusable
-      tr(ng-repeat="item in deprecatedItems", ng-class-odd="'odd'")
-        td {{ item.deprecated_item.group }}
-        td {{ item.deprecated_item.name }}
-        td {{ item.replaced_by.group }}
-        td {{ item.replaced_by.name }}
-        td {{ item.deprecation_date }}
-        td {{ item.unusable_date }}
-        td
+    div(class='row depItem' ng-repeat="item in deprecatedItems", ng-class-odd="'odd'")
+      span(class='col-md-3')
+        span(class='title') Deprecated
+        div(class='content')
+          div(class='row')
+            span(class='col-md-2 subtitle') Group
+            span(class='col-md-10') {{ item.deprecated_item.group }}
+          div(class='row')
+            span(class='col-md-2 subtitle') Item 
+            span(class='col-md-10') {{ item.deprecated_item.name }}
+      span(class='col-md-3')
+        span(class='title') Replace
+        div(class='content')
+          div(class='row')
+            span(class='col-md-2 subtitle') Group
+            span(class='col-md-10') {{ item.replaced_by.group }}
+          div(class='row')
+            span(class='col-md-2 subtitle') Item 
+            span(class='col-md-10') {{ item.replaced_by.name }}
+      span(class='col-md-4')
+        span(class='title') Dates
+        div(class='content')
+          div(class='row')
+            span(class='col-md-3 subtitle') Deprecated on
+            span(class='col-md-9') {{ item.deprecation_date }}
+          div(class='row')
+            span(class='col-md-3 subtitle') Deleted on 
+            span(class='col-md-9') {{ item.unusable_date }}
+      span(class='col-md-1')
+        span(class='title') Used
+        div(class='content')
           span(class='label label-default') {{ item.belongs_to }}
+      span(class='col-md-1')
+        span(class='title') More
 
   script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js')
   script(src='js/app.js')
