@@ -11,28 +11,30 @@ block body
             a(href='/new') Create
         form(class='navbar-form navbar-right')
           input(type='text' class='form-control' placeholder='Filter...')
-  div(class='container-fluid')
-    div(ng-controller='ItemCtrl')
-      h1 List of all deprecated items
-      table(class='table table-stripped')
-        tr
-          th(colspan='2') Old
-          th(colspan='2') New
-          th(colspan='2') Dates
-        tr
-          th Group
-          th Name
-          th Group
-          th Name
-          th Deprecation
-          th Unusable
-        tr(ng-repeat="item in deprecatedItems", ng-class-odd="'odd'")
-          td {{ item.deprecated_item.group }}
-          td {{ item.deprecated_item.name }}
-          td {{ item.replaced_by.group }}
-          td {{ item.replaced_by.name }}
-          td {{ item.deprecation_date }}
-          td {{ item.unusable_date }}
+  div(class='container-fluid', ng-controller='ItemCtrl')
+    h1 List of all deprecated items
+    table(class='table table-stripped table-condensed')
+      tr
+        th(colspan='2') Old
+        th(colspan='2') New
+        th(colspan='2') Dates
+        th(rowspan='2') Belongs To
+      tr
+        th Group
+        th Name
+        th Group
+        th Name
+        th Deprecation
+        th Unusable
+      tr(ng-repeat="item in deprecatedItems", ng-class-odd="'odd'")
+        td {{ item.deprecated_item.group }}
+        td {{ item.deprecated_item.name }}
+        td {{ item.replaced_by.group }}
+        td {{ item.replaced_by.name }}
+        td {{ item.deprecation_date }}
+        td {{ item.unusable_date }}
+        td
+          span(class='label label-default') {{ item.belongs_to }}
 
   script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js')
   script(src='js/app.js')

@@ -1,5 +1,12 @@
 var mongoose = require('mongoose');
 
+var belongValidator = {
+    validator: function(v) {
+        return v == 'ANDROID' || v == 'IOS' || v == 'API' || v == 'WINDOWS_PHONE';
+    },
+    message: '{VALUE} is not valid!'
+}
+
 var ItemSchema = new mongoose.Schema({
     name:                 { type: String,     required: true },
     group:                { type: String,     required: true },
@@ -11,6 +18,7 @@ var ItemSchema = new mongoose.Schema({
 var DeprecatedItemSchema = new mongoose.Schema({
     deprecated_item:      ItemSchema,
     replaced_by:          ItemSchema,
+    belongs_to:           { type: String,     required: true, validate: belongValidator},
     deprecation_date:     { type: Date,       required: true, default: Date.now },
     unusable_date:        { type: Date,       required: true }
 });
