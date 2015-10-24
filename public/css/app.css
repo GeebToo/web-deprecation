@@ -4,45 +4,35 @@ body {
 }
 
 .navbar {
-	background: #4285f4;
+	background: rgb(71, 71, 71);
 	color: #FEFEFE;
 	box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .navbar-inverse {
-	border-color: #4285f4;
+	border-color: rgb(153, 204, 0);
 }
 
-h1 {
-	/* color: rgb(252, 252, 252); */
+.navbar-header a:link {
+	color: rgb(153, 204, 0);
 }
 
-th {
-	text-align: center;
-	/* color: rgb(145, 203, 235); */
+.container-fluid.content {
+	width: 80%;
+	margin-left: 25px;
 }
 
-.depItem {
+.dep-group h1 {
+	color: #616161;
+	font-weight: 110;
+	font-size: 1em;
+	margin-bottom: 15px;
+}
+
+.dep-item {
 	/* Must look like a card */
 	padding: 15px;
-	margin: 15px;
-	background: #F1F1F1;
+	background: #FFFFFF;
+	margin-bottom: -1px;
 	border: 1px solid #A3A3A3;
-	border-radius: 3px;
-	box-shadow: 2px -2px 3px 0px #A3A3A3;
-}
-
-.depItem .title {
-	color: #4E4E4E;
-	display: block;
-	width: 100%;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 1.3em;
-	min-height: 2em;
-}
-
-.depItem .subtitle {
-	color: #4E4E4E;
-	text-transform: uppercase;
 }
