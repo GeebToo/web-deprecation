@@ -30,13 +30,28 @@ body {
 }
 
 .side-menu ul li {
-	height: 30px;
-	margin: 10px;
-	line-height: 30px;
+	height: 50px;
+	margin-right: 0px;
+	line-height: 50px;
+	padding-left: 10px;
+	text-transform: uppercase;
 }
+
+.side-menu ul li:hover {
+	background: #EFEFDF;
+}
+
+.side-menu ul li span.glyphicon {
+	line-height: 50px;
+}
+
+.side-menu ul li.selected {
+	background: #E9E9E9;
+} 
 
 .side-menu ul li a {
 	color: rgb(153, 204, 0);
+	text-decoration: none;
 }
 
 .dep-group h1 {
@@ -57,6 +72,10 @@ body {
 	background: #FFFFFF;
 	margin-bottom: -1px;
 	border: 1px solid #A3A3A3;
+}
+
+.dep-item:hover {
+	background: #EFEFDF;
 }
 
 .dep-list {
