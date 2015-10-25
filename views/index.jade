@@ -9,22 +9,31 @@ block body
         ul(class='nav navbar-nav navbar-right')
           li
             a(href='/create') Create
-        form(class='navbar-form navbar-right')
-          input(type='text' class='form-control' placeholder='Old Group filter')
-          input(type='text' class='form-control' placeholder='New Group filter')
-          input(type='text' class='form-control' placeholder='Usage filter')
-  div(class='container-fluid content', ng-controller='ItemCtrl')
-    div(ng-repeat="(group, items) in deprecatedItems" class="dep-group")
-      h1 {{ group }}
-      div(class='row dep-item' ng-repeat="item in items")
-        span(class='col-md-1')
-          span(class='label label-default') 
-            {{ item.belongs_to }}
-        span(class='col-md-5')
-          {{ item.deprecated_item.name }}
-        span(class='col-md-5')
-          {{ item.deprecation_date }}
-        span(class='col-md-1') more
+        form(class='navbar-form')
+          input(type='text' class='form-control' placeholder='Filter')
+  div(class='container-fluid', ng-controller='ItemCtrl')
+    div(class='row')
+      div(class='col-md-3 side-menu')
+        ul(class='list-unstyled')
+          li(class='row')
+            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
+            a(class='col-md-10', href='#', ng-click='sortByRoot()') Sort by root
+          li(class='row')
+            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
+            a(class='col-md-10', href='#', ng-click='sortByApps()') Sort by application
+          li(class='row')
+            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
+            a(class='col-md-10', href='#', ng-click='sortByDate()') Sort by deprecation date
+      div(class='col-md-9 content')
+        div(ng-repeat="(group, items) in deprecatedItems" class="dep-group")
+          h1 {{ group }}
+          div(class='dep-list')
+            div(class='row dep-item' ng-repeat="item in items")
+              span(class='col-md-1')
+                span(class='label label-default') {{ item.belongs_to }}
+              span(class='col-md-5') {{ item.deprecated_item.name }}
+              span(class='col-md-5') {{ item.deprecation_date }}
+              span(class='col-md-1') more
 
   script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js')
   script(src='js/app.js')
