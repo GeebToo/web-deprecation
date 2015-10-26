@@ -16,6 +16,7 @@ app.config(function($mdDateLocaleProvider) {
         ItemService
             .saveItem($scope.item)
             .then(function(data){
+                // Dialog, add another or go to list
                 console.log(data);
             }, function(err) {
                 $scope.err = err;
