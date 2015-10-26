@@ -35,13 +35,19 @@ block body
                 h2(class="md-toolbar-tools") {{ group }}
               md-list
                 md-list-item(class="md-3-line md-list-content", ng-repeat="item in items")
-                  div(class="md-list-item-text", layout="row")
+                  div(class="md-list-item-text item-content", layout="row", ng-click="showItem(item)")
                     div(flex="20")
                       span(class='item-info item-belongs') {{ item.belongs_to }}
-                    div(flex="40")
+                    div(flex="40", layout="column")
+                      span(class='item-info item-group') {{ item.deprecated_item.group }}
                       span(class='item-info item-name') {{ item.deprecated_item.name }}
                     div(flex="40")
-                      span(class='item-info item-date') {{ item.deprecation_date }}
+                      span(class='item-info item-date')
+                        span(ng-if="item.unusable_in > 0 && item.unusable_in <= 365")
+                          span(class="float-left") Unusable in &nbsp;
+                          span(class="item-belongs criticity-{{ item.criticity }}") {{ item.unusable_in }} 
+                          span(class="float-left") &nbsp; days
+                        span(ng-if="item.unusable_in == 0 || item.unusable_in > 365", class="unusable") Unusable
 
   <!-- Angular Material Dependencies -->
   script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js")

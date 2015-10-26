@@ -15,7 +15,7 @@ mongoose.connect(mongoFullUrl, function(err) {
 });
 
 // routes
-var indexRoute = require('./routes/index');
+var webRoute = require('./routes/web');
 var apiRoute = require('./routes/api');
 
 // express
@@ -35,14 +35,15 @@ function startListening() {
   app.use(express.static(path.join(__dirname, 'public')));
   
   // serve index and view partials
-  app.get('/', indexRoute.index);
-  app.get('/partials/:name', indexRoute.partials);
+  app.get('/', webRoute.index);
+  app.get('/create', webRoute.create);
+  app.get('/partials/:name', webRoute.partials);
 
   // JSON API
   app.use('/api', apiRoute.api);
 
-  // redirect all others to the index (HTML5 history)
-  app.get('*', indexRoute.index);
+  // redirect all others to the 404
+  app.get('*', webRoute.notfound);
   
   console.log('Listening on port ', config.api.port);
   app.listen(config.api.port);

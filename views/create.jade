@@ -1,9 +1,70 @@
 extends layout
 
 block body
-  nav(class='navbar navbar-inverse navbar-fixed-top')
-    div(class='container-fluid')
-      div(class='navbar-header')
-        a(class='navbar-brand', href="#") Deprecated
-  div(class='container-fluid')
-    form
+  div(layout='column', ng-cloak, class="full-height")
+    md-toolbar(class="md-theme-indigo")
+      div(div class="md-toolbar-tools")
+        h1(class="md-toolbar-tools") Deprecated Items
+    md-content(md-theme="docs-dark", layout-padding)
+      form(name="deprecateForm", style="max-width: 900px; margin: auto")
+        div(layout="row")
+          div(layout="column", flex, layout-padding)
+            h1 Deprecated Item
+            div(layout layout-sm="column")
+              md-input-container(flex)
+                label Group
+                input(ng-model="item.deprecated_item.group")
+              md-input-container(flex)
+                label Name
+                input(ng-model="item.deprecated_item.name")
+            md-input-container(flex)
+              label Description
+              textarea(ng-model="item.deprecated_item.description", columns="1", md-maxlength="150")
+          div(layout="column", flex, layout-padding)
+            h1 Replacement Item
+            div(layout layout-sm="column")
+              md-input-container(flex)
+                label Group
+                input(ng-model="item.replaced_by.group")
+              md-input-container(flex)
+                label Name
+                input(ng-model="item.replaced_by.name")
+            md-input-container(flex)
+              label Description
+              textarea(ng-model="item.replaced_by.description", columns="1", md-maxlength="150")
+        div(layout="row")
+          div(layout="column", flex)
+            h1 Dates
+            div(layout layout-sm="column")
+              md-datepicker(ng-model="item.deprecation_date", md-placeholder="Deprecation Date", flex)
+              md-datepicker(ng-model="item.unusable_date", md-placeholder="Unusable Date", flex)
+          div(layout="column", flex)
+            h1 App
+            div(layout layout-sm="column")
+              md-input-container(flex)
+                md-select(ng-model="item.belongs_to")
+                md-option(ng-repeat="belong in [IOS, ANDROID, API]")
+                  {{ belong }}
+      md-fab-speed-dial(md-open="closed", md-direction="up", ng-class="md-fling", align="right")
+        md-fab-trigger
+          md-button(aria-label="menu", class="md-fab")
+            ng-md-icon(icon="done")
+        md-fab-actions
+          md-button(aria-label="Reset", class="md-fab md-raised md-mini")
+            ng-md-icon(icon="clear")
+          md-button(aria-label="Validate", class="md-fab md-raised md-mini")
+            ng-md-icon(icon="save")
+       
+        
+  <!-- Angular Material Dependencies -->
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js")
+  <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
+  script(src="https://material.angularjs.org/latest/angular-material.min.js")
+  
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js")
+  script(src='js/app.js')
+  script(src='js/controller_items.js')
+  script(src='js/service_items.js')

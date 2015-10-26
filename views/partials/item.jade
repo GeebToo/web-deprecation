@@ -1,0 +1,39 @@
+md-dialog(aria-label="{{ item.deprecated_item.name }}")
+  form
+  md-dialog-content(class="sticky-container", layout="column", layout-padding)
+    div(layout="row", layout-align="space-between start", layout-padding)
+      span(class="item-info")
+        span(ng-if="item.unusable_in > 0 && item.unusable_in <= 365")
+          span(class="float-left") Unusable in &nbsp;
+          span(class="item-belongs criticity-{{ item.criticity }}") {{ item.unusable_in }} 
+          span(class="float-left") &nbsp; days
+        span(ng-if="item.unusable_in == 0 || item.unusable_in > 365") Unusable
+      span(class="item-info item-belongs ng-binding") {{ item.belongs_to }}
+    md-divider
+    div(layout="row")
+      h3(flex) Deprecated Information
+      h3(flex) Replacement Information
+      h3(flex) Dates Informations
+    md-divider
+    div(layout="row")
+      div(layout="column", layout-padding, flex)
+        h4(class="item-group", flex) {{ item.deprecated_item.group }}
+        span(class="item-name", flex) {{ item.deprecated_item.name }}
+        p(flex) {{ item.deprecated_item.description }}
+      div(layout="column", layout-padding, flex)
+        h4(class="item-group", flex) {{ item.replaced_by.group }}
+        span(class="item-name", flex) {{ item.replaced_by.name }}
+        p(flex) {{ item.replaced_by.description }}
+      div(layout="column", layout-padding, flex)
+        h4 Deprecated* on
+        span(flex) {{ item.deprecation_date }}
+        h4 Unusable* on
+        span(flex) {{ item.unusable_date }}
+    md-divider
+    span(flex)
+    div(layout="column", layout-padding)
+      span(class="wildcard-info") * Deprecated means you can use the function and get support but we do not recommend it. 
+      span(class="wildcard-info") * Unusable means the method has been removed from our SI/SDK and support is no longer available on item.
+    md-divider
+    span(flex)
+    md-button(ng-click="ok()", class="md-primary dialog-ok") Ok

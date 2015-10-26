@@ -23,6 +23,10 @@ md-list {
 	padding: 0px;
 }
 
+.item-content {
+	cursor: pointer;	
+}
+
 .dep-item-group {
 	border-radius: 4px;
 	margin-bottom: 20px;
@@ -43,6 +47,13 @@ md-list-item:hover {
     line-height: 32px;
 }
 
+.item-title {
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+	border-bottom: 1px dotted #CCC;
+}
+
 .item-belongs {
 	border-radius: 16px;
     padding: 0 12px;
@@ -50,4 +61,46 @@ md-list-item:hover {
     box-sizing: border-box;
     position: relative;
 	background: #EEE;
+}
+
+.item-group {
+	font-weight: bold;
+}
+
+.item-name {
+	font-weight: 100;
+	word-break: break-all;
+}
+
+.dialog-ok {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.item-belongs.criticity-low {
+	background: #C5E1A5;
+}
+
+.item-belongs.criticity-medium {
+	background: #FFCC80;
+}
+
+.item-belongs.criticity-high {
+	background: #FFCDD2;
+}
+
+.item-date .unusable {
+	color: #F44336;
+}
+
+.wildcard-info {
+	font-weight: 100;
+	font-size: 0.8em;
 }
