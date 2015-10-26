@@ -1,1 +1,1 @@
-var app = angular.module('deprecatedWebApp', []);
+var app = angular.module('deprecatedWebApp', ['ngMaterial', 'ngMdIcons']);

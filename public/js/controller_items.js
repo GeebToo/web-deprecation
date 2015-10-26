@@ -44,6 +44,13 @@ app.controller('ItemCtrl', function ($scope, ItemService) {
     ItemService
         .getItems()
         .then(function(data){
+            var dataCount = data.length;
+            for(var index = 0; index < dataCount; index++) {
+                var itemDeprecationDate = data[index].deprecation_date;
+                var itemUnusableDate = data[index].unusable_date;
+                data[index].deprecation_date = moment(itemDeprecationDate).fromNow();
+                data[index].unusable_date = moment(itemUnusableDate).fromNow();
+            }
             $scope.data = data;
             $scope.sortByApps();
         }, function(err) {

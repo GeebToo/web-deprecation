@@ -1,41 +1,57 @@
 extends layout
 
 block body
-  nav(class='navbar navbar-inverse navbar-fixed-top')
-    div(class='container-fluid')
-      div(class='navbar-header')
-        a(class='navbar-brand', href="#") Deprecated
-      div(class='navbar-collapse collapse')
-        ul(class='nav navbar-nav navbar-right')
-          li
-            a(href='/create') Create
-        form(class='navbar-form')
-          input(type='text' class='form-control' placeholder='Filter')
-  div(class='container-fluid', ng-controller='ItemCtrl')
-    div(class='row')
-      div(class='col-md-3 side-menu')
-        ul(class='list-unstyled')
-          li(class='row', ng-class="(sort == 'appsSort') ? 'selected' : ''")
-            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
-            a(class='col-md-10', href='#', ng-click='sortByApps()') Sort by application
-          li(class='row', ng-class="(sort == 'rootSort') ? 'selected' : ''")
-            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
-            a(class='col-md-10', href='#', ng-click='sortByRoot()') Sort by root
-          li(class='row', ng-class="(sort == 'dateSort' ? 'selected' : ''")
-            span(class='col-md-2 glyphicon glyphicon-search', aria-hidden='true')
-            a(class='col-md-10', href='#', ng-click='sortByDate()') Sort by deprecation date
-      div(class='col-md-9 content')
-        div(ng-repeat="(group, items) in deprecatedItems" class="dep-group")
-          h1 {{ group }}
-          div(class='dep-list')
-            div(class='row dep-item' ng-repeat="item in items")
-              span(class='col-md-1')
-                span(class='label label-default') {{ item.belongs_to }}
-              span(class='col-md-5') {{ item.deprecated_item.name }}
-              span(class='col-md-5') {{ item.deprecation_date }}
-              span(class='col-md-1') more
+  div(ng-controller='ItemCtrl', layout='column', ng-cloak, class="full-height")
+    md-toolbar(class="md-theme-indigo", ng-show="!showSearch")
+      div(div class="md-toolbar-tools")
+        h1(class="md-toolbar-tools") Deprecated Items
+        span(flex)
+        md-button(aria-label="Search", ng-click="showSearch = !showSearch")
+          ng-md-icon(icon="search")
+    md-toolbar(class="md-hue-1", ng-show="showSearch")
+      div(class="md-toolbar-tools")
+        md-button(ng-click="showSearch = !showSearch", aria-label="Back")
+          ng-md-icon(icon="arrow_back")
+          h3(flex="10") Back
+          md-input-container(md-theme="input", flex)
+          label &nbsp;
+          input(ng-model="search.who", placeholder="Enter search")
+          md-button(aria-label="Search", ng-click="showSearch = !showSearch")
+          ng-md-icon(icon="search")
+    section(section layout="row" flex)
+      md-sidenav(layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')")
+        md-content
+          md-list
+            md-list-item
+              md-button(class="menu-btn md-primary", ng-click="sortByApps()") Sort by application
+            md-list-item
+              md-button(class="menu-btn md-primary", ng-click="sortByRoot()") Sort by group
+            md-list-item
+              md-button(class="menu-btn md-primary", ng-click="sortByDate()") Sort by deprecation date
+      md-content(flex layout-padding)
+        div(layout="column" layout-fill layout-align="top center")
+            div(ng-repeat="(group, items) in deprecatedItems" class="dep-item-group")
+              md-toolbar(md-scroll-shrink ng-if="true") 
+                h2(class="md-toolbar-tools") {{ group }}
+              md-list
+                md-list-item(class="md-3-line md-list-content", ng-repeat="item in items")
+                  div(class="md-list-item-text", layout="row")
+                    div(flex="20")
+                      span(class='item-info item-belongs') {{ item.belongs_to }}
+                    div(flex="40")
+                      span(class='item-info item-name') {{ item.deprecated_item.name }}
+                    div(flex="40")
+                      span(class='item-info item-date') {{ item.deprecation_date }}
 
-  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js')
+  <!-- Angular Material Dependencies -->
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js")
+  <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
+  script(src="https://material.angularjs.org/latest/angular-material.min.js")
+  
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js")
   script(src='js/app.js')
   script(src='js/controller_items.js')
   script(src='js/service_items.js')
