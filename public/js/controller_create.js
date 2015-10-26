@@ -13,5 +13,12 @@ app.config(function($mdDateLocaleProvider) {
         $scope.item.deprecation_date = moment($scope.item.deprecation_date).format(); // Convert dates
         $scope.item.unusable_date = moment($scope.item.unusable_date).format();
         console.log($scope.item);
+        ItemService
+            .saveItem($scope.item)
+            .then(function(data){
+                console.log(data);
+            }, function(err) {
+                $scope.err = err;
+            });
     };
 });

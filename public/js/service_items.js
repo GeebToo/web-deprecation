@@ -6,6 +6,7 @@
 app.factory('ItemService', function ($http, $q) {
     var factory = {
         items: [],
+        result: {},
         getItems: function () {
             var deferred = $q.defer();
             $http
@@ -13,6 +14,19 @@ app.factory('ItemService', function ($http, $q) {
                     .success(function (data, status) {
                         factory.items = data;
                         deferred.resolve(factory.items);
+                    })
+                    .error(function (data, status) {
+                        deferred.reject({status: status});
+                    });
+            return deferred.promise;
+        },
+        saveItem: function(item) {
+            var deferred = $q.defer();
+            $http
+                    .post('http://localhost:1337/api/deprecated/', item)
+                    .success(function (data, status) {
+                        factory.result = {'status': status, 'item': data};
+                        deferred.resolve(factory.result);
                     })
                     .error(function (data, status) {
                         deferred.reject({status: status});
