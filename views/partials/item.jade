@@ -1,6 +1,13 @@
 md-dialog(aria-label="{{ item.deprecated_item.name }}")
-  form
+  md-toolbar
+    div(div class="md-toolbar-tools")
+      h1(class="md-toolbar-tools") {{ item.deprecated_item.name }}
+      span(flex)
+      md-button(aria-label="Cancel", ng-click="ok()")
+        ng-md-icon(icon="close")
   md-dialog-content(class="sticky-container", layout="column", layout-padding)
+    md-button(class="md-fab md-fab-bottom-right", aria-label="Dekete", ng-click="delete()")
+      ng-md-icon(icon="delete")
     div(layout="row", layout-align="space-between start", layout-padding)
       span(class="item-info")
         span(ng-if="item.unusable_in > 0 && item.unusable_in <= 365")
@@ -34,6 +41,3 @@ md-dialog(aria-label="{{ item.deprecated_item.name }}")
     div(layout="column", layout-padding)
       span(class="wildcard-info") * Deprecated means you can use the function and get support but we do not recommend it. 
       span(class="wildcard-info") * Unusable means the method has been removed from our SI/SDK and support is no longer available on item.
-    md-divider
-    span(flex)
-    md-button(ng-click="ok()", class="md-primary dialog-ok") Ok
