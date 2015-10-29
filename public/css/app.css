@@ -104,3 +104,9 @@ md-list-item:hover {
 	font-weight: 100;
 	font-size: 0.8em;
 }
+
+ng-md-icon {
+	fill: white;
+	position: relative;
+    top: 5px; /* adjust for svg viewbox */
+}

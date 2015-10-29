@@ -55,13 +55,20 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
     // Item methods
     $scope.showItem = function(item) {
         $mdDialog.show({
-            controller: DialogController,
+            controller: ItemDialogController,
             templateUrl: 'partials/item',
             locals: {
                 item: item
             }
         });
-    }
+    };
+    // Add popup
+    $scope.showAdd = function() {
+        $mdDialog.show({
+            controller: AddDialogController,
+            templateUrl: 'partials/create'
+        });
+    };
     // Load data
     ItemService
         .getItems()
@@ -103,9 +110,17 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
              $scope.err = err;
         });
     /* Dialog Controller is used when showing the item, item is injected by locals */
-    function DialogController($scope, $mdDialog, item) {
+    function ItemDialogController($scope, $mdDialog, item) {
         $scope.item = item;
         $scope.ok = function() {
+            $mdDialog.hide();
+        };
+    };
+    function AddDialogController($scope, $mdDialog) {
+        $scope.validate = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
             $mdDialog.hide();
         };
     }

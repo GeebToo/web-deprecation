@@ -2,7 +2,9 @@ extends layout
 
 block body
   div(ng-controller='ItemCtrl', layout='column', ng-cloak, class="full-height")
-    md-toolbar(class="md-theme-indigo", ng-show="!showSearch")
+    md-button(class="md-fab md-fab-bottom-right", aria-label="Add", ng-click="showAdd()")
+      ng-md-icon(icon="add")
+    md-toolbar(ng-show="!showSearch")
       div(div class="md-toolbar-tools")
         h1(class="md-toolbar-tools") Deprecated Items
         span(flex)
@@ -48,7 +50,8 @@ block body
                           span(class="item-belongs criticity-{{ item.criticity }}") {{ item.unusable_in }} 
                           span(class="float-left") &nbsp; days
                         span(ng-if="item.unusable_in == 0 || item.unusable_in > 365", class="unusable") Unusable
-
+    
+                         
   <!-- Angular Material Dependencies -->
   script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js")
   script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js")
@@ -60,4 +63,5 @@ block body
   script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.min.js")
   script(src='js/app.js')
   script(src='js/controller_items.js')
+  script(src='js/controller_create.js')
   script(src='js/service_items.js')

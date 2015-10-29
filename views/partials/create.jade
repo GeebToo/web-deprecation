@@ -1,0 +1,52 @@
+md-dialog(aria-label="Create Item")
+  form(ng-controller="CreateCtrl")
+    md-dialog-content(class="sticky-container", layout="column", layout-padding)
+      div(layout="row")
+        div(layout="column", flex, layout-padding)
+          h1 Deprecated Item
+          div(layout layout-sm="column")
+            md-input-container(flex)
+              label Group
+              input(ng-model="item.deprecated_item.group" required)
+            md-input-container(flex)
+              label Name
+              input(ng-model="item.deprecated_item.name" required)
+          md-input-container(flex)
+            label Description
+            textarea(ng-model="item.deprecated_item.description", columns="1", md-maxlength="150")
+        div(layout="column", flex, layout-padding)
+          h1 Replacement Item
+          div(layout layout-sm="column")
+            md-input-container(flex)
+              label Group
+              input(ng-model="item.replaced_by.group" required)
+            md-input-container(flex)
+              label Name
+              input(ng-model="item.replaced_by.name" required)
+          md-input-container(flex)
+            label Description
+            textarea(ng-model="item.replaced_by.description", columns="1", md-maxlength="150")
+      div(layout="row")
+        div(layout="column", flex)
+          h1 Dates
+          div(layout layout-sm="column")
+            div(flex)
+              md-datepicker(name="deprecation", ng-model="item.deprecation_date", md-placeholder="Deprecation", required)
+            div(flex)
+              md-datepicker(name="unusabel", ng-model="item.unusable_date", md-placeholder="Unusable", required)
+        div(layout="column", flex)
+          h1 App
+          div(layout layout-sm="column")
+            md-input-container(flex)
+              md-select(ng-model="item.belongs_to", required)
+                md-option(ng-repeat="belong in belong_items track by $index") {{ belong }}
+      div(layout="row" layout-align="end center")
+        md-fab-speed-dial(md-open="closed", md-direction="up", ng-class="md-fling")
+          md-fab-trigger
+            md-button(aria-label="menu", class="md-fab")
+              ng-md-icon(icon="done")
+          md-fab-actions
+            md-button(aria-label="Reset", class="md-fab md-raised md-mini", type="reset")
+              ng-md-icon(icon="clear")
+            md-button(aria-label="Validate", class="md-fab md-raised md-mini", ng-click="saveItem()")
+              ng-md-icon(icon="save")

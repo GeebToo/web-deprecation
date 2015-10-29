@@ -29,7 +29,7 @@ To run it, just clone the repository and do the following:
 
 > Be sure to have the correct `mongo` credentials in `config.js` and a db named `web-deprecation`
 
-Then go to http://localhost:1337 by default.
+Then go to [http://localhost:1337](http://localhost:1337) by default.
 
 > You can change the port in `config.js` file
 
