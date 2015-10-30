@@ -71,7 +71,8 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
                 item : {
                     deprecation_date: new Date(moment().format()),
                     unusable_date: new Date(moment().add(6, 'month').format())
-                }
+                },
+                baseScope : $scope
             }
         });
     };
@@ -126,6 +127,7 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
                 .deleteItem($scope.item)
                 .then(function(data) {
                     // Todo toast
+                    // Todo remove item from list on screen
                     $mdDialog.hide();
                 }, function(err) {
                     console.log(err);
@@ -134,7 +136,7 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
                 });
         }
     };
-    function AddDialogController($scope, $mdDialog, item) {
+    function AddDialogController($scope, $mdDialog, baseScope, item) {
         $scope.item = item;
         $scope.belong_items = ['IOS', 'ANDROID', 'WEB'];
         $scope.validate = function() {
@@ -145,10 +147,13 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
                 .saveItem($scope.item)
                 .then(function(data){
                     // Good, item saved, toast
+                    // Todo add item into scope for screen
+                    console.log(baseScope.deprecatedItems);
+                    $mdDialog.hide();
                 }, function(err) {
                     $scope.err = err;
+                    $mdDialog.hide();
                 });
-                $mdDialog.hide();
             };
         $scope.cancel = function() {
             $mdDialog.hide();
