@@ -38,7 +38,7 @@ app.factory('ItemService', function ($http, $q) {
              $http
                     .delete('http://localhost:1337/api/deprecated/'+ item._id)
                     .success(function (data, status) {
-                        deferred.resolve();
+                        deferred.resolve(item);
                     })
                     .error(function (data, status) {
                         deferred.reject({status: status});
