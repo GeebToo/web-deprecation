@@ -32,6 +32,18 @@ app.factory('ItemService', function ($http, $q) {
                         deferred.reject({status: status});
                     });
             return deferred.promise;
+        },
+        deleteItem: function(item) {
+             var deferred = $q.defer();
+             $http
+                    .delete('http://localhost:1337/api/deprecated/'+ item._id)
+                    .success(function (data, status) {
+                        deferred.resolve();
+                    })
+                    .error(function (data, status) {
+                        deferred.reject({status: status});
+                    });
+            return deferred.promise;           
         }
     };
     return factory;

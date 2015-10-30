@@ -1,12 +1,17 @@
 md-dialog(aria-label="Create Item")
-  md-toolbar
-    div(div class="md-toolbar-tools")
-      h1(class="md-toolbar-tools") Create Item
-      span(flex)
-      md-button(aria-label="Cancel", ng-click="cancel()")
-        ng-md-icon(icon="close")
-  form(ng-controller="CreateCtrl")
-    md-button(class="md-fab md-fab-bottom-right", aria-label="Save", ng-click="saveItem()")
+  form
+    md-toolbar
+      div(div class="md-toolbar-tools")
+        h1(class="md-toolbar-tools") Create Item
+        span(flex)
+        md-button(aria-label="Reset", type="reset")
+          md-tooltip(md-direction="bottom") Reset
+          ng-md-icon(icon="refresh")
+        md-button(aria-label="Cancel", ng-click="cancel()")
+          md-tooltip(md-direction="bottom") Cancel
+          ng-md-icon(icon="close")
+    md-button(class="md-fab md-fab-bottom-right", aria-label="Save", ng-click="validate()")
+      md-tooltip(md-direction="left") Save
       ng-md-icon(icon="save")
     md-dialog-content(class="sticky-container", layout="column", layout-padding, style="min-width:500px")
       div(layout="column")

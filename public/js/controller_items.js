@@ -66,7 +66,13 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
     $scope.showAdd = function() {
         $mdDialog.show({
             controller: AddDialogController,
-            templateUrl: 'partials/create'
+            templateUrl: 'partials/create',
+            locals: {
+                item : {
+                    deprecation_date: new Date(moment().format()),
+                    unusable_date: new Date(moment().add(6, 'month').format())
+                }
+            }
         });
     };
     // Load data
@@ -115,11 +121,35 @@ app.controller('ItemCtrl', function ($scope, ItemService, $mdDialog) {
         $scope.ok = function() {
             $mdDialog.hide();
         };
+        $scope.delete = function() {
+            ItemService
+                .deleteItem($scope.item)
+                .then(function(data) {
+                    // Todo toast
+                    $mdDialog.hide();
+                }, function(err) {
+                    console.log(err);
+                    $scope.err = err;
+                    $mdDialog.hide();
+                });
+        }
     };
-    function AddDialogController($scope, $mdDialog) {
+    function AddDialogController($scope, $mdDialog, item) {
+        $scope.item = item;
+        $scope.belong_items = ['IOS', 'ANDROID', 'WEB'];
         $scope.validate = function() {
-            $mdDialog.hide();
-        };
+            $scope.item.deprecation_date = moment($scope.item.deprecation_date).format(); // Convert dates
+            $scope.item.unusable_date = moment($scope.item.unusable_date).format();
+            console.log($scope.item);
+            ItemService
+                .saveItem($scope.item)
+                .then(function(data){
+                    // Good, item saved, toast
+                }, function(err) {
+                    $scope.err = err;
+                });
+                $mdDialog.hide();
+            };
         $scope.cancel = function() {
             $mdDialog.hide();
         };

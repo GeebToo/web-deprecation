@@ -5,4 +5,8 @@ var app = angular
     		.primaryPalette('teal')
     		.accentPalette('orange');
 		}
-	);
+	).config(function($mdDateLocaleProvider) {
+    	$mdDateLocaleProvider.formatDate = function(date) {
+        	return moment(date).format('YYYY/MM/DD');
+    	};
+	});

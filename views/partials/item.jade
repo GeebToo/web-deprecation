@@ -4,9 +4,11 @@ md-dialog(aria-label="{{ item.deprecated_item.name }}")
       h1(class="md-toolbar-tools") {{ item.deprecated_item.name }}
       span(flex)
       md-button(aria-label="Cancel", ng-click="ok()")
+        md-tooltip(md-direction="bottom") Close
         ng-md-icon(icon="close")
   md-dialog-content(class="sticky-container", layout="column", layout-padding)
     md-button(class="md-fab md-fab-bottom-right", aria-label="Dekete", ng-click="delete()")
+      md-tooltip(md-direction="left") Delete
       ng-md-icon(icon="delete")
     div(layout="row", layout-align="space-between start", layout-padding)
       span(class="item-info")
