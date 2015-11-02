@@ -17,7 +17,8 @@ md-dialog(aria-label="{{ item.deprecated_item.name }}")
           span(class="item-belongs criticity-{{ item.criticity }}") {{ item.unusable_in }} 
           span(class="float-left") &nbsp; days
         span(ng-if="item.unusable_in == 0 || item.unusable_in > 365") Unusable
-      span(class="item-info item-belongs ng-binding") {{ item.belongs_to }}
+      span(class="item-info")
+        span(class="item-belongs ng-binding") {{ item.belongs_to }}
     md-divider
     div(layout="row")
       h3(flex) Deprecated Information
